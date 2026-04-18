@@ -47,17 +47,17 @@ jobs:
 
     - name: Configure Docker for Artifact Registry
       run: |
-        gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
+        gcloud auth configure-docker europe-west-docker.pkg.dev --quiet
 
     - name: Build and Push to Artifact Registry
       run: |
-        IMAGE=europe-west3-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
+        IMAGE=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
         docker build -t $IMAGE .
         docker push $IMAGE
 
     - name: Deploy Cloud Run Service (auth required and internal ingress)
       run: |
-        IMAGE=europe-west3-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
+        IMAGE=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
         gcloud run deploy ${{ env.PROJECT }} \
           --image=$IMAGE \
           --region=${{ env.GCP_REGION }} \
