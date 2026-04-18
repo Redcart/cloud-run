@@ -51,13 +51,13 @@ jobs:
 
     - name: Build and Push to Artifact Registry
       run: |
-        IMAGE=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
+        IMAGE=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run/app:${{ github.sha }}
         docker build -t $IMAGE .
         docker push $IMAGE
 
     - name: Deploy Cloud Run Service (auth required and internal ingress)
       run: |
-        IMAGE=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
+        IMAGE=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run/app:${{ github.sha }}
         gcloud run deploy ${{ env.PROJECT }} \
           --image=$IMAGE \
           --region=${{ env.GCP_REGION }} \
