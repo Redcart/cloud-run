@@ -43,5 +43,5 @@ async def display_secrets():
 # Sensitive environment variable retrieved at runtime from Secret Manager
 @app.get("/display/secrets-runtime")
 async def display_secrets_runtime():
-    password = get_secret(secret_name="password")
+    password = get_secret(secret_name="PASSWORD")
     return {"message": f"PASSWORD: {password}"}
