@@ -8,6 +8,7 @@ GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 INPUT_DATASET = os.getenv("INPUT_DATASET")
 OUTPUT_DATASET = os.getenv("OUTPUT_DATASET")
 API_KEY = os.getenv("API_KEY", "Not found in environment variables")
+GITHUB_SECRET_VAR = os.getenv("SECRET_VAR", "Not found in environment variables")
 
 app = FastAPI()
 
@@ -45,3 +46,8 @@ async def display_secrets():
 async def display_secrets_runtime():
     password = get_secret(secret_name="PASSWORD")
     return {"message": f"PASSWORD: {password}"}
+
+# Sensitive environment variable retrieved at runtime from GitHub Secrets
+@app.get("/display/secrets-github")
+async def display_secrets_github():
+    return {"message": f"SECRET_VAR from GitHub Secrets: {GITHUB_SECRET_VAR}"}
