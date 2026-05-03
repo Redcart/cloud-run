@@ -1,4 +1,4 @@
-name: 'Deploy Cloud Run Service'
+name: 'Deploy Cloud Run Service with environment variables'
 
 on:
   push:
@@ -16,7 +16,7 @@ env:
   SERVICE_ACCOUNT_GH: ${{ vars.SERVICE_ACCOUNT_GH }}
   WIF_POOL_ID: ${{ vars.WIF_POOL_ID }} # Workload Identity Federation Pool
   WIF_POOL_PROVIDER: ${{ vars.WIF_POOL_PROVIDER }} # Workload Identity Federation Provider
-  PROJECT: ${{ vars.PROJECT }}
+  PROJECT: "cloud-run-with-env-variables"
   UV_VERSION: 0.11.6 # Version of uv to install
 
 jobs:
